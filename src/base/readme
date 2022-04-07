@@ -1,0 +1,50 @@
+Code Interview for Group 2
+Student Name: LV, Zhiyuan
+Student ID: 20583046
+
+Task 1: The Design and Implementation of Lab 3
+	Step 1: Make Class Comparable
+		1. Add the 'Comparable' tag to class 'Note' and class 'Folder'
+		2. Implement two 'compareTo' functions for class 'Note' and class 'Folder'
+			~ For class 'Note', I used date.before() and date.after() to compare two dates
+			~ If the date of first Note is earlier, return 1; If the second one is earlier, return -1; If they are the same, return 0
+			~ For class 'Folder', I used String.compareTo() to compare two strings
+			~ Directly return the output of String.compareTo()
+
+	Step 2: Sort Notes
+		1. Used the Collections.sort() to sort the notes in a folder
+		2. Firstly, used a for loop to call each folder's sortNotes() then used the Collections.sort() to sort the folders
+
+	Step 3: Search Notes
+		1. The search is case-insensitive, so I used String.toLowerCase() to turn all of the words into lower case
+		2. Then I used String.split() to separate different words
+		3. For all of the keywords, there are only two conditions: the combination with 'or' and the combination without 'or'
+		4. Used a double for loop to analyze every keyword of every note
+		5. Firstly, used instance of to separate TextNote and ImageNote, ImageNote only search title, TextNote also need to search content
+		6. Secondly, check every three words combination to assure whether it is an 'or' combination or not
+		7. If it is an 'or' combination, check the first word and the third word using String.contains()
+		8. If it is not, directly check this word using String.contains()
+		9. If the check result is true, add the note to result list
+		10. In the end, return the result list containing all of the researched notes
+		11. Implement searchNotes() for class 'NoteBook' by using for loop to call every folder's searchNotes()
+
+Task 2: Design for New Task
+	~ Overview Design
+		Firstly, convert the text into lower case, so that the same words would be correctly counted. Secondly,
+		remove all of the punctuation marks, so that the counting of words would not be disturbed. Then, split
+		the text into words and store them in string array[]. We need to count the frequency of each element in
+		the array separately. Java provides the HashMap class, which implements the Map interface. HashMap<key,
+		value> could be used to store the word string and the number of occurrences of the corresponding word.
+		Since we care about the top 3 frequent elements, we need to sort the key-value pairs in the mapping table
+		based on the frequency. We could use the 'bucket sort' algorithm to sort the key-value pairs. The bucket
+		numbered 'i' will be used to store the elements of the array with frequency 'i'. After the sorting process,
+		the elements in the bucket with the larger index appear more frequently, so we reverse the order to get the
+		data from the bucket, until we get 3 most frequently occurring  elements. And also, all of the elements
+		stored in bucket[1] could be removed, because the words should appear at least twice.
+
+	~ Possible Data Structures
+		We need a Map<String, Integer> to store the key-value pairs, a List<Integer>[] to be as bucket,
+		a List<String> to return the result
+
+	~ Important Algorithm
+		HashMap, Key-value pairs, Bucket Sort
