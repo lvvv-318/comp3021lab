@@ -9,7 +9,7 @@ import java.io.FileWriter;
 
 public class TextNote extends Note {
 
-	private String content;
+	String content;
 	private static final long serialVersionUID = 1L;
 
 	public TextNote(String title) {

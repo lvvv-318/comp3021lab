@@ -113,4 +113,39 @@ public class NoteBook implements java.io.Serializable {
 		return true;
 	}
 
+	public void addFolder(String name) {
+		folders.add(new Folder(name));
+	}
+
+	public Folder getFolder(String name) {
+		for(Folder f : folders) {
+			if(f.getName().equals(name)) {return f;}
+		}
+		return null;
+	}
+
+	public Note getNote(String folderName,String noteName) {
+		Folder folder = getFolder(folderName);
+		for(Note note : folder.getNotes()) {
+			if(note.getTitle().equals(noteName)) {return note;}
+		}
+		return null;
+	}
+
+	public void saveNote(String folderName,String noteName, String content) {
+		Note note = getNote(folderName,noteName);
+		if(note instanceof TextNote) {
+			TextNote textnote = (TextNote) note;
+			textnote.content = content;
+		}
+		else
+			return;
+	}
+
+	public void removeNote(String folderName, String noteName) {
+		Folder folder = getFolder(folderName);
+		Note note = getNote(folderName,noteName);
+		folder.getNotes().remove(note);
+	}
+
 }
